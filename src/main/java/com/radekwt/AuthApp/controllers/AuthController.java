@@ -1,22 +1,22 @@
 package com.radekwt.AuthApp.controllers;
 
-import com.radekwt.AuthApp.entities.User;
+import com.radekwt.AuthApp.dtos.UserDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/auth")
 public class AuthController {
     @PostMapping("/register")
-    public User registerUser(){
-        return new User();
+    public UserDto registerUser(){
+        return new UserDto();
     }
     @PostMapping("/login")
-    public User loginUser(){
-        return new User();
+    public UserDto loginUser(){
+        return new UserDto();
     }
     @PostMapping("/logout")
-    public User logoutUser(){
-        return new User();
+    public UserDto logoutUser(){
+        return new UserDto();
     }
 
 }
