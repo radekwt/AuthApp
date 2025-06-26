@@ -1,9 +1,6 @@
 package com.radekwt.AuthApp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +15,12 @@ import java.time.Instant;
 @Entity
 @Table(name="access_tokens")
 public class AccessToken {
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "access_token_id_seq")
     private Long id;
     private String token;
+    @OneToOne
+    @JoinColumn(name="user_id")
     private User user;
     private Instant expiryDate;
 
