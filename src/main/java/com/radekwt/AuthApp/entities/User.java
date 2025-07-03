@@ -19,9 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_id_seq")
     private Long id;
     private String username;
+    @Column(unique = true,nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
-    @JoinColumn(name="user_id")
-    @ManyToOne
+    @ManyToMany(fetch = FetchType.EAGER)
     private Role role;
 }
