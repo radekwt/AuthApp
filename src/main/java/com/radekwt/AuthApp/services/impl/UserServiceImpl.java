@@ -36,35 +36,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto userDto) {// update by email,doesnt check if username already exists
-        User user = userRepository.findByEmail(userDto.getUsername())
+        User user = userRepository.findByUsername(userDto.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userDto.getUsername()));
         userMapper.updateEntityFromDto(userDto, user);
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }
-
-    @Override
-    public UserDto getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
-        return null;
-    }
     @Override
     public UserDto getUserById(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
-        return null;
+        return userMapper.toDto(user);
     }
     @Override
     public UserDto getUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found with username: " + username));
-        return null;
-    }
-
-    @Override
-    public boolean isEmailExists(String email) {
-        return userRepository.findByEmail(email).isPresent();
+        return userMapper.toDto(user);
     }
 
     @Override
